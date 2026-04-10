@@ -1,0 +1,17 @@
+# Core LangChain
+langchain
+langchain-community
+langchain-text-splitters
+langchain-chroma
+langchain-ollama
+langgraph
+langgraph-checkpoint-sqlite
+
+# Vector store / document loading
+chromadb
+pypdf
+beautifulsoup4
+playwright
+
+# pip install -r requirements.txt
+# playwright install
