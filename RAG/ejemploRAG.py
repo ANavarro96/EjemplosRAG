@@ -7,29 +7,18 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.vectorstores import VectorStoreRetriever
 from langchain.tools import tool, ToolRuntime
 from langchain.messages import HumanMessage, SystemMessage
-from dataclasses import dataclass
 
-
-@dataclass
-class Contexto:
-    retriever: VectorStoreRetriever
-
-# =========================
-# CONFIG
-# =========================
 CHROMA_DIR = "./chroma_db"
 COLLECTION_NAME = "streamers"
 
 
-
-# Modelo generativo en Ollama para responder
 LLM_MODEL = "gemma4:e2b"  
 
 
 def crear_embeddings():
 
     embeddings = OllamaEmbeddings(
-        model="mxbai-embed-large", # El modelo LLM a usar
+        model="mxbai-embed-large", # El modelo LLM a usar. Que sea el mismo con el que vectorizamos los documentos!
         base_url="http://localhost:11434", # Esta es la URL de Ollama (local)
     )
     return embeddings
@@ -41,14 +30,8 @@ def crear_retriever(vectorstore: Chroma):
         search_kwargs={"k": 4}
     )
     return retriever
+ 
 
-
-    
-
-
-# =========================
-# 9) MAIN
-# =========================
 def main():
 
 

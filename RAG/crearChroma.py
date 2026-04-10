@@ -8,29 +8,29 @@ from langchain_chroma import Chroma
 CHROMA_DIR = "./chroma_db"
 COLLECTION_NAME = "streamers"
 
-# =========================
-# 1) CARGAMOS DOCUMENTOS PDF
-# =========================
+"""
+Con esta función cargamos los documentos, pasamos de fichero a Documents
+"""
 def cargar_documentos(fichero: str):
     documentos = open(fichero, "r").readlines() # cargamos el documento
     return documentos
 
 
-# =========================
-# 2) PARTIR EN CHUNKS
-# =========================
+"""
+Partimos los documentos en trozos
+"""
 def partir_documentos(documentos):
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,
-        chunk_overlap=200
+        chunk_size=512,
+        chunk_overlap=50
     )
     chunks = splitter.create_documents(documentos) # como el origen es textual, creo los documentos.
     return chunks
 
 
-# =========================
-# 3) EMBEDDINGS
-# =========================
+"""
+Creamos los embeddings
+"""
 def crear_embeddings():
 
     embeddings = OllamaEmbeddings(
@@ -40,9 +40,10 @@ def crear_embeddings():
     return embeddings
 
 
-# =========================
-# 4) CREAR / CARGAR CHROMA
-# =========================
+"""
+Añadimos los embeddings a Chroma
+
+"""
 def crear_vectorstore(embeddings,chunks = None):
     """
     Si la colección ya existe en disco, la reutiliza.
