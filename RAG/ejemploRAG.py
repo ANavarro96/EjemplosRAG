@@ -57,7 +57,7 @@ def main():
     el vectorstore.
     """
 
-    resultado = vectorstore.similarity_search_with_score("¿De dónde es elxokas?", k = 4)
+    resultado = vectorstore.similarity_search_with_score("¿De dónde es El Xokas?", k = 4)
 
     for indice,documento in enumerate(resultado):
         print(f"documento num {indice} -> {documento}")
